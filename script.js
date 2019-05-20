@@ -98,25 +98,17 @@ doubleClicNavbar.addEventListener('dblclick', changeCDN);
 // qu'à 20 % de sa taille d'origine et les boutons "Edit" / "View" restent visibles. 
 // Cette fonction sera réversible : s'il repasse sa souris, la card redevient normale !
 
-function mouseOvercard() {
-    var allCards = document.getElementsByClassName("col-md-4");
-    var cardElement = document.getElementsByClassName("card-text");
-    var cardImage = document.getElementsByClassName("card-img-top");
-    var viewButton = document.querySelectorAll("button.btn-success");
-
-    for (var i = 0; i < 6; i++) {
-
-        var defaultConfig = true
-        viewButton[i].addEventListener("mouseenter", function() {
-            if (defaultConfig === true) {
-                cardImage[i].style = "width: 20%";
-                cardElement[i].style = "visibility: hidden";
-                defaultConfig = false
-            } else if (defaultConfig === false) {
-                cardImage[i].style = "width: 100%";
-                cardElement[i].style = "visibility: visible";
-            }
-        });
+document.querySelectorAll(".card")
+.forEach(function (card) {
+  card.querySelector("button")
+  .addEventListener("mouseover", function () {
+    card.querySelector("p")
+    .classList.toggle("collapse");
+    let img = card.querySelector("img");
+    if (img.style.width === "20%") {
+      img.style.width = "100%";
+    } else {
+      img.style.width = "20%";
     }
-}
-    mouseOvercard();
+  });
+});
